@@ -24,6 +24,12 @@ const TERMINAL_RUN = new Set(['completed', 'failed', 'cancelled']);
 const TERMINAL_STEP = new Set(['completed', 'failed', 'cancelled']);
 const CHILD_CREATION = new Set(['step_created', 'hook_created', 'wait_created']);
 
+/**
+ * `getMaxEventsPerRun` reads `process.env.WORKFLOW_MAX_EVENTS`, and a browser
+ * tab has no `process`: fall back to the World contract's default there.
+ */
+const maxEventsPerRun = () => (typeof process === 'undefined' ? 25_000 : getMaxEventsPerRun());
+
 function page<T>(items: T[], limit = 100, cursor?: string | null) {
   const start = cursor ? Number(cursor) : 0;
   const data = items.slice(start, start + limit);
@@ -256,7 +262,7 @@ async function applyEvent(tx: IDBTransaction, runId: string, data: Row, params: 
   };
   let entity: Row = {};
   let preload = false;
-  const lifecycle = () => ({ run: stripRun(run!), maxEvents: getMaxEventsPerRun() });
+  const lifecycle = () => ({ run: stripRun(run!), maxEvents: maxEventsPerRun() });
 
   const createRun = (source: Row) => ({
     runId,
