@@ -1,3 +1,5 @@
+packages:
+  - examples/*
 minimumReleaseAgeExclude:
   - '@workflow/*'
   - workflow

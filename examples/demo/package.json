@@ -1,0 +1,20 @@
+{
+  "name": "workflow-world-browser-demo",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@workflow/world": "5.0.0-beta.39",
+    "ulid": "^3.0.1",
+    "workflow-world-browser": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "vite": "^8.0.0"
+  }
+}

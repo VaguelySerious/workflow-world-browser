@@ -21,3 +21,5 @@ jobs:
       # Builds the package, then runs the unit tests and the Workflow SDK's
       # World compatibility suite (@workflow/world-testing) against dist/.
       - run: pnpm test
+      # The browser demo (examples/demo) typechecks and builds against dist/.
+      - run: pnpm --filter workflow-world-browser-demo build

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>workflow-world-browser demo</title>
+  </head>
+  <body>
+    <header>
+      <h1>workflow-world-browser</h1>
+      <p class="lede">
+        A durable workflow running entirely in this tab: runs, events, the queue and streams live in IndexedDB.
+        Reload mid-step and it resumes. Open two tabs and only one drives.
+        <a href="https://github.com/pranaygp/workflow-world-browser/tree/main/examples/demo">How it works</a>
+      </p>
+      <div id="role" class="role"></div>
+    </header>
+
+    <section class="controls">
+      <button id="start" class="primary">Start a run</button>
+      <button id="approve" disabled>Approve (resume hook)</button>
+      <button id="crash" class="danger" title="Reloads the page immediately, killing the step mid-flight">Crash this tab</button>
+      <button id="second">Open a second tab</button>
+      <button id="clear" class="quiet">Clear all data</button>
+      <select id="runs" aria-label="Run"></select>
+    </section>
+
+    <main>
+      <section class="panel wide">
+        <h2>Run</h2>
+        <p id="run-status"></p>
+        <ol id="pipeline"></ol>
+      </section>
+
+      <section class="panel">
+        <h2>Live progress <small>stream, tailed from IndexedDB</small></h2>
+        <pre id="stream"></pre>
+      </section>
+
+      <section class="panel">
+        <h2>This tab <small>driver activity</small></h2>
+        <pre id="activity"></pre>
+      </section>
+
+      <section class="panel wide">
+        <h2>Event log <small>world.events.list</small></h2>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>slot</th><th>eventType</th><th>correlationId</th><th>at</th><th>eventData</th></tr></thead>
+            <tbody id="events"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Queue <small>IndexedDB rows, deleted only after delivery returns</small></h2>
+        <table>
+          <thead><tr><th>message</th><th>queue</th><th>run</th><th>attempt</th><th>due</th></tr></thead>
+          <tbody id="queue"></tbody>
+        </table>
+      </section>
+
+      <section class="panel">
+        <h2>Web Locks <small>navigator.locks.query()</small></h2>
+        <ul id="locks"></ul>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

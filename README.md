@@ -19,6 +19,21 @@ reloads and tab closes with no server.
   hook token claims and `hook_conflict`, `(runId, resumeId)` resume dedup,
   `retryAfter`, `sinceCursor` deltas, and preloaded logs on `run_started`.
 
+## Try it
+
+**Live demo: https://pranaygp.github.io/workflow-world-browser/**
+
+Press **Start a run**, then **Crash this tab** while a step is running: the
+page reloads, re-acquires the Web Lock, redelivers the in-flight queue
+message, and the step runs again as attempt 2 before the run completes. Or
+press **Open a second tab**, start a run there, and close the driving tab
+mid-step: the second tab takes over. The demo shows the event log, the queue
+rows, and the lock state as it goes.
+
+The demo drives the World with a small runner written against the World
+interface, not the Workflow SDK runtime, which does not run in a browser.
+[examples/demo](examples/demo) explains why and lists the exact steps.
+
 ## Install
 
 ```bash
