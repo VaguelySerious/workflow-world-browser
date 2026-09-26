@@ -1,0 +1,41 @@
+{
+  "name": "workflow-world-browser",
+  "version": "0.1.0",
+  "description": "A Workflow SDK World that runs in the browser: IndexedDB storage, a durable queue consumed by one tab at a time, and streams over BroadcastChannel.",
+  "type": "module",
+  "packageManager": "pnpm@11.24.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "license": "Apache-2.0",
+  "author": "Pranay Prakash",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pranaygp/workflow-world-browser.git"
+  },
+  "keywords": ["workflow", "world", "workflow-sdk", "indexeddb", "browser"],
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "pnpm build && vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@workflow/errors": "5.0.0-beta.24",
+    "@workflow/world": "5.0.0-beta.39",
+    "fake-indexeddb": "^6.0.0",
+    "ulid": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@workflow/world-testing": "5.0.0-beta.57",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  }
+}
